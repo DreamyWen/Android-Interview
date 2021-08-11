@@ -18,3 +18,38 @@
         60L, TimeUnit.SECONDS,
         new ArrayBlockingQueue(10));
 
+## SpringBoot
+### SpringBoot 自动装配过程:
+    1.SpringApplication启动
+    2.new SpringApplication() 构建一个Spring应用
+    3.initialize 初始化模块
+    3.a 配置source
+    3.b 配置是否为web环境
+    3.c 创建初始化构造器 （重要）
+    3.d 创建应用监听器 （重要）
+    3.e 配置引用的主方法所在类
+    
+    4.获取构造器（工厂）对象
+    5.得到所需工厂集合的实例
+    6.获取传入的工厂类名，类加载器
+    7.通过类加载器，获取指定的spring.factories文件
+    8.获取文件中工厂类的全路径
+    9.通过类路径反射得到工厂的class对象，构造方法
+    10.生成工厂类实例，返回
+    
+    11.启动应用监听器
+    12.应用启动计时器开始计时，应用启动监听器开始监听（headless模式配置）
+    13.启动SpringApplicationRunListeners 
+    14.监听内容为 配置环境，应用上下文等
+    15.配置环境模块ConfigurableEnvironment 配置环境模块
+    16.创建配置环境（web/noweb）
+    17.加载属性文件资源
+    18.配置监听
+     
+    19.应用上下文模块 ConfigurableApplicationContext
+    20.创建应用上下文 (web/noweb)，基本属性配置，更新应用上下文
+    21.加载配置环境，ResourceLoader资源管理器，配置监听，加载启动参数
+    22.准备环境所需的bean工厂（从10获取到的）
+    23.通过工厂产生环境所需的bean
+    24.应用启动计时器开始计时，应用启动监听器开始监听
+    25.结束
